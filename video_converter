@@ -1,0 +1,3 @@
+from pirecorder import Convert
+
+Convert(indir = '/home/pi/automated_chamber/training_videos/', outdir= '/home/pi/automated_chamber/training_videos/converted')
