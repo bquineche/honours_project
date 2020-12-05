@@ -1,0 +1,32 @@
+import RPi.GPIO as GPIO
+import time
+
+print('Activating feeder #2.')
+GPIO.setmode(GPIO.BOARD)
+# Set pin 37 (GPIO 26) as output
+GPIO.setup(37, GPIO.OUT)
+servo1 = GPIO.PWM(37, 50)
+servo1.start(0)
+print('Waiting for 1 second')
+time.sleep(1)
+print('Rotating 180 degrees in 10 steps...')
+# Define variable duty
+duty = 2
+# Loop for duty values from 2 to 5
+while duty <= 4:
+    servo1.ChangeDutyCycle(duty)
+    time.sleep(0.1)  # just enough time for the wing to get there
+    servo1.ChangeDutyCycle(0)  # then we set it to 0 so it stops
+    time.sleep(0.1)  # time we want it to stop for
+    duty = duty + 1  # then continue to next iteration
+time.sleep(1)
+# Turn back to 0 degrees
+print('Turning back to 0 degrees!')
+servo1.ChangeDutyCycle(2)
+time.sleep(0.5)
+servo1.ChangeDutyCycle(0)
+# Cleaning things up at the end
+print('Cleaning up...')
+servo1.stop()
+GPIO.cleanup()
+print('All done!')
