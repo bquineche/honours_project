@@ -1,1 +1,54 @@
 Set up for two LED strip lights and two feeders
+
+• Raspberry Pi 4 GPIO Assignments and connections for automated chamber
+
+    ○ FEEDER 1 connections
+        GPIO 25 (pin22) -> yellow servo motor cable (servo control signal line cable)
+        5V power (pin2) -> red servo motor cable (servo power cable, the battery positive terminal)
+        Ground (pin30) -> brown servo motor cable (battery negative terminal cable) to a ground source on RPI 
+        
+    ○ FEEDER 2 connections
+        GPIO 25 (pin22) -> yellow servo motor cable (servo control signal line cable)
+        5V power (pin2) -> red servo motor cable (servo power cable, the battery positive terminal)
+        Ground (pin30) -> brown servo motor cable (battery negative terminal cable) to a ground source on RPI
+    
+• LIGHTS
+   
+   • connecting 12V power supply source to breadboard to supply appropriate voltage to LED lights.
+      - using a female adapter, get two jumper wires to power the breadboard:
+      -> red to + line
+      -> black to - line
+  
+   ○  LIGHTS 1
+      • connecting the black cable from LED lights to the + line at the top of our board
+          -> connect with a male-male jumper cable (I used a white one to make it easier to see)
+          
+      • place mosfets on board, positioned like in the picture provided in picture_file
+      • connect cable of GPIO output from Rpi to the leftmost connection out of the 3 for the mosfet
+      • connect red/green or blue cable from LED to the middle connection out of the 3 for the mosfet
+      • last connection out of the 3 for the mosfet: the mini cable from (-negative) blue line in the board to mosfet 
+
+
+• GPIO Assignments for LIGHTS 1:
+     red  = GPIO 17 (pin11)
+     green  = GPIO 22 (pin15)
+     blue  = GPIO 24 (pin18)
+
+   ○  LIGHTS 2
+      • same method as for LIGHTS 1
+      • connect black cable from led to + line on breadboard
+      
+• GPIO Assignments for LIGHTS 2
+   red  = GPIO 5 (pin29)
+   green  = GPIO 6 (pin31)
+   blue  = GPIO 16 (pin36)
+
+
+# to control lights on terminal:
+    > sudo pigpiod
+    > pigs p GPIO_number intensity 
+
+      # example: to set red lights to max intensity
+        > sudo pigpiod
+        > pigs p 17 255
+
